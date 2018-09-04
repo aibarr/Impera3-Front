@@ -1,6 +1,7 @@
 /*global gantt*/
 import React, { Component } from 'react';
 import 'dhtmlx-gantt';
+import 'dhtmlx-gantt/codebase/ext/dhtmlxgantt_keyboard_navigation'
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
 
 class Gantt extends Component {
@@ -9,6 +10,7 @@ class Gantt extends Component {
         this.initGanttEvents();
         gantt.init(this.ganttContainer);
         if(this.props.tasks){
+            gantt.layout = (this.props.config.layout)
             gantt.parse(this.props.tasks);
         }
         
@@ -82,8 +84,6 @@ class Gantt extends Component {
         });
 
         gantt.attachEvent("onTaskDblClick", function(id,e){
-            console.log(id)
-            console.log(e)
             if(this.props.onTaskDblClick) {
                 this.props.onTaskDblClick(id);
             }
