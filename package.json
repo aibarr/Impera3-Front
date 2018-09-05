@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.0.2",
     "@redux-offline/redux-offline": "^2.4.0",
     "dhtmlx-gantt": "^5.2.0",
     "lodash": "^4.17.10",

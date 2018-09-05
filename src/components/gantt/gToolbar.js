@@ -1,11 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 
-class gToolbar extends Component{
+class GToolbar extends Component {
 
-    render(){
-        
+    render() {
+        return (
+            <div>
+                <Button 
+                    variant="contained"
+                    color="primary"
+                >
+                    Set BL
+                </Button>
+                <Button>
+                    Unset BL
+                </Button>
+            </div>
+
+        );
     }
 
 }
 
-export default gToolbar;
+export default GToolbar;
