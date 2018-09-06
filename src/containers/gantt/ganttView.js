@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import Gantt from '../../components/gantt/gantt'
 import './ganttView.css'
 import { selectTasks } from '../../actions/gantt'
+import {setBL} from '../../actions/project'
 import GToolbar from '../../components/gantt/gToolbar'
 
 class GanttView extends Component {
     constructor(props) {
         super(props)
-
         this.onTaskSelect = this.handleTaskSelect.bind(this)
     }
 
     componentDidMount() {
-        console.log(this.props.data)
     }
 
     handleTaskSelect = (task, state, e) => {
@@ -21,17 +20,30 @@ class GanttView extends Component {
         return (task, state, e)
     }
 
+    handleSetBL = () => {
+        let selected = this.props.selected;
+        this.props.setBL(selected)
+    }
+
+    handleUnsetBL(){
+
+    }
+
     render() {
         return (
             <div>
                 <div className='gantt-container'>
-                    <GToolbar/>
+                    <GToolbar
+                        setBL = {this.handleSetBL}
+                        unsetBL = {this.handleUnsetBL}
+                    />
                     <Gantt
                         tasks={this.props.data}
                         config={this.props.config}
                         onTaskMultiSelect={this.props.onTaskSelect}
                         onTaskDblClick = {this.props.onTaskDblClick}
                     />
+                    <p>{this.props.selected}</p>
                 </div>
             </div>
         )
@@ -41,7 +53,8 @@ class GanttView extends Component {
 const mapStateToProps = state => {
     return {
         data: state.gantt.data,
-        config: state.gantt.config
+        config: state.gantt.config,
+        selected: state.gantt.use.selected
     }
 }
 
@@ -53,12 +66,16 @@ const mapDispatchToProps = dispatch => {
         doNewLink: '',
         editTask: '',
         onTaskSelect: (tasks, state, e) => {
-            console.log(tasks)
             dispatch(selectTasks(tasks))
             
         },
         onTaskDblClick: (id) => {
-            console.log(id)
+        },
+        setBL : (selected) => {
+            if(selected.length > 0){
+                dispatch(setBL("1", selected))
+            }
+            
         }
     }
 }

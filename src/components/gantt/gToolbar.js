@@ -9,10 +9,15 @@ class GToolbar extends Component {
                 <Button 
                     variant="contained"
                     color="primary"
+                    onClick={this.props.setBL}
                 >
                     Set BL
                 </Button>
-                <Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.props.unsetBL}
+                >
                     Unset BL
                 </Button>
             </div>

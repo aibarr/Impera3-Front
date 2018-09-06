@@ -14,11 +14,14 @@ class Gantt extends Component {
   }
 
   componentDidMount() {
+    gantt.config.multislect = true;
     this.initGanttEvents();
     gantt.init(this.ganttContainer);
+    gantt.templates.task_class = gantt.templates.grid_row_class = gantt.templates.task_row_class = function (start, end, task) {
+      if (gantt.isSelectedTask(task.id)) return "gantt_selected";
+    };
     if (this.props.tasks) {
-      gantt.layout = (this.props.config.layout);
-      gantt.config.multislect = true;
+      gantt.layout = (this.props.config.layout);      
       gantt.parse(this.props.tasks);
     }
 
@@ -42,7 +45,6 @@ class Gantt extends Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <div
         ref={(input) => { this.ganttContainer = input }}
